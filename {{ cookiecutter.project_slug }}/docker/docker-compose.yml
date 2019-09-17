@@ -1,0 +1,18 @@
+version: "3"
+services:
+  web:
+    # replace username/repo:tag 
+    image: "{{ cookiecutter.docker_username }}/{{ cookiecutter.project_slug }}"
+      replicas: 1
+      resources:
+        limits:
+          cpus: "12"
+          memory: 4G
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "4000:80"
+    networks:
+      - webnet
+networks:
+  webnet:

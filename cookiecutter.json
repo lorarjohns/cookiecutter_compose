@@ -1,0 +1,11 @@
+{
+    "project_name": "project_name",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "author_name": "author_name",
+    "docker_username": "docker_username",
+    "docker_password": "docker_password",
+    "repo_name": "{{ cookiecutter.docker_username }}/{{ cookiecutter.project_slug }}",
+    "jupyter_host_port": "8888",
+    "description": "{{ cookiecutter.project_description }}",
+    "use_nvidia_docker": ["no", "yes"]
+}
