@@ -9,13 +9,17 @@ services:
     ports: 
     - "3306:3306"
     environment:
-    - MSQL_ROOT_PASSWORD=password
-    - MSQL_USER=user
-    - MSQL_PASSWORD=password
-    - MSQL_DATABASE=database
-    #volumes: ../data
-#  networks:
-#      - webnet
-      
-#networks:
-#  webnet:
+      MSQL_ROOT_PASSWORD: "password"
+      MSQL_USER: "user"
+      MSQL_PASSWORD: "password"
+      MSQL_DATABASE: "db"
+    # To persist data on the container:
+    #expose:
+    #- "3306"
+    # Where the data will be persisted:
+    #volumes:
+    #- my-db:/var/lib/mysql
+
+#Name the volume:
+#volumes:
+# my-db:
