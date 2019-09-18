@@ -7,17 +7,18 @@ services:
     - "443:443"
 
     volumes:
-      
+    - root:/{{ cookiecutter.project_slug }}
     command: tail -f /dev/null
     tty: true
     
-  web:
+  #web:
     # replace username/repo:tag 
     #build: .
-    image: nginx
-    ports:
-    - "80:8080"
-  db:
+    #image: nginx
+    #ports:
+   # - "80:8080"
+  
+  mysql:
     image: mysql
     ports: 
     - "3306:3306"  
@@ -27,12 +28,14 @@ services:
       MSQL_PASSWORD: "password"
       MSQL_DATABASE: "db"
     # To persist data on the container:
-    #expose:
-    #- "3306"
+    expose:
+    - "3306:3306"
     # Where the data will be persisted:
-    #volumes:
-    #- my-db:/var/lib/mysql
+    volumes:
+    - my-db:/{{ cookiecutter.project_slug }}/data
 
 #Name the volume:
-#volumes:
-# my-db:
+volumes:
+ root:
+ my-db:
+ 
