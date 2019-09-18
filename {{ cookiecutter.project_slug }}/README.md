@@ -1,7 +1,5 @@
 # {{ cookiecutter.project_name }}
 
-{{ cookiecutter.description }}
-
 ## Requirements
 
 * [Docker version 17 or later](https://docs.docker.com/install/#support)
