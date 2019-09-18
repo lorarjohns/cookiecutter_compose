@@ -1,9 +1,4 @@
-# build an image
-{%- if cookiecutter.use_nvidia_docker == 'yes' -%}
-FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
-{%- else -%}
 FROM ubuntu:18.04
-{%- endif %}
 
 COPY . .
 
@@ -21,6 +16,9 @@ RUN pip3 install --upgrade pip
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 EXPOSE 4000
+EXPOSE 3306
+EXPOSE 8888
+EXPOSE 8080
 
 ARG UID
 RUN useradd docker -l -u $UID -s /bin/bash -m
@@ -29,4 +27,4 @@ USER docker
 # set the working directory
 WORKDIR /work
 
-ENTRYPOINT ["/bin/bash"]
+CMD ["ubuntu:18.04", "-f", ""]

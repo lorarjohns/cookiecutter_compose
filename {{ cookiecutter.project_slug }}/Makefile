@@ -35,16 +35,26 @@ else:
             print("%-20s %s" % (target, help))
 endef
 
+define START_DOCKER_CONTAINER
+if [ `$(DOCKER) inspect -f {% raw -%}{{.State.Running}}{%- endraw %} $(CONTAINER_NAME)` = "false" ] ; then
+        $(DOCKER) start $(CONTAINER_NAME)
+fi
+endef
+
 ###########################################################################################################
 ## VARIABLES
 ###########################################################################################################
+{%- if cookiecutter.use_nvidia_docker == 'yes' %}
+export DOCKER=nvidia-docker
+{%- else %}
 export DOCKER=docker
+{%- endif %}
 export DOCKER_COMPOSE=docker-compose
 export TARGET=
 export PWD=`pwd`
 export PRINT_HELP_PYSCRIPT
 export PYTHONPATH=$PYTHONPATH:$(PWD)
-export PROJECT_NAME=$(PROJECT_NAME)
+export PROJECT_NAME={{ cookiecutter.project_slug }}
 export IMAGE_NAME=$(PROJECT_NAME)-image
 export CONTAINER_NAME=$(PROJECT_NAME)-container
 export JUPYTER_HOST_PORT=8888
@@ -53,7 +63,7 @@ export PYTHON=python3
 export DOCKERFILE=docker/Dockerfile
 
 ###########################################################################################################
-## ADD TARGETS SPECIFIC TO "test_cookie"
+## ADD TARGETS SPECIFIC TO "{{ cookiecutter.project_name }}"
 ###########################################################################################################
 
 
@@ -73,7 +83,7 @@ init-docker: ## initialize docker image
 
 ## create-container: ## create docker container
 
-jupyter: ## start Jupyter Notebook server
+jupyter-notebook: ## start Jupyter Notebook server
 	jupyter-notebook --ip=0.0.0.0 --port=${JUPYTER_CONTAINER_PORT}
 
 test: ## run test cases in tests directory
