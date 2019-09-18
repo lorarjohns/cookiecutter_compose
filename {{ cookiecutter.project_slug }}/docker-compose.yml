@@ -3,9 +3,11 @@ services:
   ubuntu:
     image: ubuntu:18.04
     ports:
-    - 
-    environment:
-      - volumes:
+    - "80:80"
+    - "443:443"
+
+    volumes:
+      
     command: tail -f /dev/null
     tty: true
     
