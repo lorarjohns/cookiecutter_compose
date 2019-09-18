@@ -5,9 +5,6 @@ FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 FROM ubuntu:18.04
 {%- endif %}
 
-# set the working directory
-WORKDIR /{{ cookiecutter.project_slug }}/work
-
 COPY . .
 
 RUN apt-get update && apt-get install -y \
@@ -28,5 +25,8 @@ EXPOSE 4000
 ARG UID
 RUN useradd docker -l -u $UID -s /bin/bash -m
 USER docker
+
+# set the working directory
+WORKDIR /work
 
 ENTRYPOINT ["/bin/bash"]
