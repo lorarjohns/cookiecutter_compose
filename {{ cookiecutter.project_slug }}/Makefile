@@ -35,12 +35,6 @@ else:
             print("%-20s %s" % (target, help))
 endef
 
-define START_DOCKER_CONTAINER
-if [ `$(DOCKER) inspect -f {{.State.Running}} $(CONTAINER_NAME)` = "false" ] ; then
-        $(DOCKER) start $(CONTAINER_NAME)
-fi
-endef
-
 ###########################################################################################################
 ## VARIABLES
 ###########################################################################################################
@@ -49,7 +43,6 @@ export DOCKER_COMPOSE=docker-compose
 export TARGET=
 export PWD=`pwd`
 export PRINT_HELP_PYSCRIPT
-export START_DOCKER_CONTAINER
 export PYTHONPATH=$PYTHONPATH:$(PWD)
 export PROJECT_NAME=$(PROJECT_NAME)
 export IMAGE_NAME=$(PROJECT_NAME)-image
@@ -75,18 +68,10 @@ init: init-docker ## initialize repository for traning
 
 
 init-docker: ## initialize docker image
-	## $(DOCKER) build -t $(IMAGE_NAME) -f $(DOCKERFILE) --build-arg UID=$(shell id -u) .
 	
-	$(DOCKER_COMPOSE) up -d
+	$(DOCKER_COMPOSE) up -d 
 
 ## create-container: ## create docker container
-## 	$(DOCKER) run -it -v $(PWD):/work -p $(JUPYTER_HOST_PORT):$(JUPYTER_CONTAINER_PORT) --name $(CONTAINER_NAME) $(IMAGE_NAME)
-
-start-container: ## start existing docker container
-	@echo "$$START_DOCKER_CONTAINER" | $(SHELL)
-	@echo "Launched $(CONTAINER_NAME)..."
-	# $(DOCKER) attach $(CONTAINER_NAME)
-	$(DOCKER_COMPOSE) start $(CONTAINER_NAME)
 
 jupyter: ## start Jupyter Notebook server
 	jupyter-notebook --ip=0.0.0.0 --port=${JUPYTER_CONTAINER_PORT}
