@@ -5,6 +5,6 @@
     "docker_username": "docker_username",
     "docker_password": "docker_password",
     "repo_name": "{{ cookiecutter.docker_username }}/{{ cookiecutter.project_slug }}",
-    "jupyter_host_port": "8888",
+    "jupyter_host_port": "8888"
 
 }
