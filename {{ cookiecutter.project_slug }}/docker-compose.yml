@@ -10,9 +10,9 @@ services:
       - "8888:8888"
       depends_on: mysql
       tty: true
-      environment:
-        DB_NAME: mysql
-        DB_PORT: 3306
+      #environment:
+       # DB_NAME: mysql
+        #DB_PORT: 3306
         #DB_USER: root
         #DB_PWD: password
       command: /bin/bash
