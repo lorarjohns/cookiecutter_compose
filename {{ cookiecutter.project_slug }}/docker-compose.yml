@@ -5,7 +5,7 @@ services:
       context: ./{{ cookiecutter.project_slug }}/docker
       dockerfile: Dockerfile
       volumes:
-      - "./{{ cookiecutter.project_name }}/:/{{ cookiecutter.project_name }}/"
+      - "./{{ cookiecutter.project_slug }}/:/{{ cookiecutter.project_slug }}/"
       ports:
       - "8888:8888"
       depends_on: mysql
