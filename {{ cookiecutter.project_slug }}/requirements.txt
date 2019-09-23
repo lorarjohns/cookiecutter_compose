@@ -97,6 +97,7 @@ sortedcollections
 sortedcontainers
 soupsieve
 spacy
+spyder
 srsly
 statsmodels
 sumy
