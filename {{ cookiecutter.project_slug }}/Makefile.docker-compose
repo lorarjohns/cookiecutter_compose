@@ -22,14 +22,9 @@ help: ## This help.
 ###########################################################################################################
 ## VARIABLES
 ###########################################################################################################
-export TARGET=
-export PWD=`pwd`
-export PYTHONPATH=$PYTHONPATH:$(PWD)
-export PROJECT_NAME={{ cookiecutter.project_slug }}
-export IMAGE_NAME=$(PROJECT_NAME)-image
-export CONTAINER_NAME=$(PROJECT_NAME)-container
+
+# export PROJECT_NAME={{ cookiecutter.project_slug }}
 export PYTHON=python3
-export DOCKERFILE=docker/Dockerfile
 
 ###########################################################################################################
 ## ADD TARGETS SPECIFIC TO "{{ cookiecutter.project_slug }}"
@@ -72,7 +67,7 @@ clean: ## Clean the generated/compiles files
 	echo "nothing clean ..."
 
 
-
+#  TESTING COMMANDS
 
 test: ## run test cases in tests directory
 	$(PYTHON) -m unittest discover
