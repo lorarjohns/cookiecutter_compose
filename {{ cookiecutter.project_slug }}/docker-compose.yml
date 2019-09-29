@@ -5,7 +5,7 @@ services:
       context: ./docker
       dockerfile: Dockerfile
     volumes:
-    - "./{{ cookiecutter.project_slug }}/:/code/"
+    - "./{{ cookiecutter.project_slug }}/:/"
     ports:
     - "8888:8888"
     depends_on: 
