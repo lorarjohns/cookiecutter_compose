@@ -2,20 +2,21 @@ version: "3"
 services:
   app:
     build:
-      context: ./{{ cookiecutter.project_slug }}/docker
+      context: ./docker
       dockerfile: Dockerfile
-      volumes:
-      - "./{{ cookiecutter.project_slug }}/:/{{ cookiecutter.project_slug }}/"
-      ports:
-      - "8888:8888"
-      depends_on: mysql
-      tty: true
+    volumes:
+    - "{{ cookiecutter.project_slug }}/:/{{ cookiecutter.project_slug }}/"
+    ports:
+    - "8888:8888"
+    depends_on: 
+    - mysql
+    tty: true
       #environment:
        # DB_NAME: mysql
         #DB_PORT: 3306
         #DB_USER: root
         #DB_PWD: password
-      command: /bin/bash
+    command: /bin/bash
   
   #ubuntu:
     #image: ubuntu:18.04
@@ -25,17 +26,15 @@ services:
 
   mysql:
     image: mysql
-    ports: 
-    - "3306:3306"  
     environment:
       MSQL_ROOT_PASSWORD: "password"
       MSQL_USER: "user"
-      MSQL_DATABASE: "{{ cookiecutter.project_name }}_db"
+      MSQL_DATABASE: "{{ cookiecutter.project_slug }}_db"
     # To persist data on the container:
-    expose:
-    - "3306:3306"
+    ports: 
+    - "3306:3306"  
     # Where the data will be persisted:
     volumes:
-    - "./{{ cookiecutter.project_slug }}/data:/var/lib/mysql"
+    - "{{ cookiecutter.project_slug }}/data/:/var/lib/mysql/"
 
  
