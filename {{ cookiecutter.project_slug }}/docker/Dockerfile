@@ -15,7 +15,7 @@ RUN pip3 install --upgrade setuptools
 # copy requirements.txt to container
 # and install packages
 
-COPY ./requirements.txt /code/requirements.txt
+COPY requirements.txt /requirements.txt
 RUN pip3 install -r /code/requirements.txt
 
 RUN pip3 install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.1.0/en_core_web_sm-2.1.0.tar.gz#egg=en_core_web_sm
