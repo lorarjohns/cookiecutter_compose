@@ -10,13 +10,12 @@ ipykernel
 ipython
 more-itertools
 jsonschema
+jupyter
 jupyterlab
 lxml
 nltk
 numpy
 pandas
-pickle
-Pillow
 plotly
 pyLDAvis
 scikit-learn
@@ -27,7 +26,6 @@ sortedcollections
 sortedcontainers
 spacy
 spyder
-statsmodels
 sumy
 textacy
 tqdm
