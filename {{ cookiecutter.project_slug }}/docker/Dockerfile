@@ -9,10 +9,11 @@ RUN apt-get update && apt-get install -y \
   python3.7-dev
 
 # make virtual directory
+SHELL ["/bin/sh", "-lc"]
 RUN mkdir -p /{{ cookiecutter.project_slug }}
 
-RUN pip install --upgrade pip
-RUN pip install --upgrade setuptools
+RUN pip3 install --upgrade pip
+RUN pip3 install --upgrade setuptools
 
 # copy requirements.txt to container
 # and install packages
@@ -24,7 +25,9 @@ RUN pip install https://github.com/explosion/spacy-models/releases/download/en_c
 RUN pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_md-2.1.0/en_core_web_md-2.1.0.tar.gz#egg=en_core_web_md
 RUN pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-2.1.0/en_core_web_lg-2.1.0.tar.gz#egg=en_core_web_lg
 
-COPY ./ /{{ cookiecutter.project_slug }}/
+COPY ./ ./ 
 
-WORKDIR /{{ cookiecutter.project_slug }}
+WORKDIR ./
+
+
 
