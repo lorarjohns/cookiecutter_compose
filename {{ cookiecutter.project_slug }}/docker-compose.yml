@@ -34,7 +34,7 @@ services:
     ports: 
     - "3306:3306"  
     # Where the data will be persisted:
-    volumes:
-    - "{{ cookiecutter.project_slug }}/data/:/var/lib/mysql/"
+    #volumes:
+    #- "{{ cookiecutter.project_slug }}/data/:/var/lib/mysql/"
 
  
