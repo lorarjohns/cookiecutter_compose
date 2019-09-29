@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 USER root
 
-MKDIR -p /work/
+RUN mkdir -p /work/
 
 RUN apt-get update && apt-get install -y \
   git \
