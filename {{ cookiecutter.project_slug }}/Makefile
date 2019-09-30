@@ -1,3 +1,4 @@
+# Thanks to https://gist.github.com/mpneuried/0594963ad38e68917ef189b4e6a269db
 # import config.
 # You can change the default config with `make cnf="config_special.env" build`
 # cnf ?= config.env
@@ -11,7 +12,7 @@
 # thanks to https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 
 help: ## This help.
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' # pipe sort before awk to sort commands
 .DEFAULT_GOAL := help
 
 ###########################################################################################################
@@ -38,14 +39,7 @@ export PYTHON=python3
 
 # DOCKER COMMANDS
 
-#build-run: ## Build the release and develoment container. The development
-#	docker-compose build --no-cache $(PROJECT_NAME)
-#	docker-compose run $(PROJECT_NAME) grunt build
-#	docker build -t $(PROJECT_NAME) .
-	
-#run: stop ## Run container on port configured in `config.env`
-#	docker run -i -t --rm --env-file=./config.env -p=$(PORT):$(PORT) --name="$(PROJECT_NAME)" $(PROJECT_NAME)
-
+# Some general ideas borrowed from:
 # https://medium.com/applied-data-science/the-full-stack-data-scientist-part-2-a-practical-introduction-to-docker-1ea932c89b57
 
 build: ## Create the two images
@@ -65,7 +59,6 @@ stop: ## Stop running containers
 
 clean: ## Clean the generated/compiles files
 	echo "nothing clean ..."
-
 
 #  TESTING COMMANDS
 
